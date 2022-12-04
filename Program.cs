@@ -54,10 +54,6 @@ namespace WebApp
                     ctx.Context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
                     // Strict-Transport-Security: max-age=31536000; includeSubDomains
                     ctx.Context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-                    // more changes added
-                    ctx.Context.Response.Headers.Remove("Server");
-                    ctx.Context.Response.Headers.Remove("X-Powered-By");
-                    ctx.Context.Response.Headers.Add("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
 
 
                 }
@@ -79,10 +75,6 @@ namespace WebApp
                 context.Response.Headers.Remove("Server");
                 // Strict -Transport-Security header
                 context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-
-                // Header for cookies 
-                context.Response.Headers.Add("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
-                
 
 
                 await next();
