@@ -47,6 +47,13 @@ namespace WebApp
                 context.Response.Headers.Add("X-Xss-Protection", "1");
                 context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
                 context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must- revalidate");
+                context.Response.Headers.Add("Pragma", "no-cache");
+                // adding respoinse header for samesite cookies
+                context.Response.Headers.Add("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
+                // adding header for content security policy
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';");
+
+
                 await next();
              });
 
