@@ -71,7 +71,10 @@ namespace WebApp
                 context.Response.Headers.Add("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
                 // adding header for content security policy
                 context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';");
-
+                // adding header policy to remove X-Powered-By
+                context.Response.Headers.Remove("X-Powered-By");
+                // adding header policy for removing server
+                context.Response.Headers.Remove("Server");
 
                 await next();
              });
