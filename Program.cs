@@ -76,7 +76,7 @@ namespace WebApp
                 // adding respoinse header for samesite cookies
                 context.Response.Headers.Add("Set-Cookie", "Secure;SameSite=Strict");
                 // adding header for content security policy is set to self
-                context.Response.Headers.Add("Content-Security-Policy", "default-src self");
+                //context.Response.Headers.Add("Content-Security-Policy", "default-src self");
 
                 // adding header policy to remove X-Powered-By
                 context.Response.Headers.Remove("X-Powered-By");
@@ -88,6 +88,7 @@ namespace WebApp
 
             app.UseCookiePolicy(new CookiePolicyOptions{
                 MinimumSameSitePolicy = SameSiteMode.Strict,
+                //HttpOnly = HttpOnlyPolicy.Always,
                 Secure = CookieSecurePolicy.Always
             });
 
