@@ -46,7 +46,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Patients/Create
-        [Authorize(Roles = "Doctor,Nurse")]
+        [Authorize(Policy = "DoctorNurse")]
         public IActionResult Create()
         {
             return View();
@@ -57,7 +57,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Doctor,Nurse")]
+        [Authorize(Policy = "DoctorNurse")]
         public async Task<IActionResult> Create([Bind("FirstName,LastName,DateOfBirth,Id,CreationTime")] Patient patient)
         {
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Patients/Edit/5
-        [Authorize(Roles = "Doctor,Nurse")]
+        [Authorize(Policy = "DoctorNurse")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Patient == null)
@@ -92,7 +92,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Doctor,Nurse")]
+        [Authorize(Policy = "DoctorNurse")]
         public async Task<IActionResult> Edit(Guid id, [Bind("FirstName,LastName,DateOfBirth,Id,CreationTime")] Patient patient)
         {
             if (id != patient.Id)
@@ -124,7 +124,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Patients/Delete/5
-        [Authorize(Roles = "Doctor,Nurse")]
+        [Authorize(Policy = "DoctorNurse")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Patient == null)
@@ -145,7 +145,7 @@ namespace WebApp.Controllers
         // POST: Patients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Doctor,Nurse")]
+        [Authorize(Policy = "DoctorNurse")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Patient == null)

@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
+using WebApp.Helpers;
 
 namespace WebApp
 {
@@ -23,7 +25,16 @@ namespace WebApp
             builder.Services.AddControllersWithViews();
 
 
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DoctorNurse", policy =>
+                {
+                    string[] emails = new string[] { "doctor.ca", "nurse.ca" };
+                    policy.Requirements.Add(new EmailDomainRequirement(emails));
+                });
+            });
 
+            builder.Services.AddSingleton<IAuthorizationHandler, EmailDomainHandler>();
 
             var app = builder.Build();
 
