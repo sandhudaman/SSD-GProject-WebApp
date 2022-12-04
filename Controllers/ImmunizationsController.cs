@@ -46,6 +46,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Immunizations/Create
+        [Authorize(Roles = "Doctor,Nurse")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +57,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Create([Bind("Id,OfficialName,TradeName,LotNumber,ExpirationDate,CreationTime,UpdatedTime")] Immunization immunization)
         {
             if (ModelState.IsValid)
@@ -69,6 +71,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Immunizations/Edit/5
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Immunization == null)
@@ -89,6 +92,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,OfficialName,TradeName,LotNumber,ExpirationDate,CreationTime,UpdatedTime")] Immunization immunization)
         {
             if (id != immunization.Id)
@@ -120,6 +124,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Immunizations/Delete/5
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Immunization == null)
@@ -140,6 +145,7 @@ namespace WebApp.Controllers
         // POST: Immunizations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Immunization == null)

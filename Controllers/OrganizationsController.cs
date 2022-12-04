@@ -46,6 +46,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Organizations/Create
+        [Authorize(Roles = "Doctor,Nurse")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +57,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Create([Bind("Name,Type,Address,Id,CreationTime")] Organization organization)
         {
             if (ModelState.IsValid)
@@ -69,6 +71,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Organizations/Edit/5
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null || _context.Organization == null)
@@ -89,6 +92,7 @@ namespace WebApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Edit(Guid id, [Bind("Name,Type,Address,Id,CreationTime")] Organization organization)
         {
             if (id != organization.Id)
@@ -120,6 +124,7 @@ namespace WebApp.Controllers
         }
 
         // GET: Organizations/Delete/5
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null || _context.Organization == null)
@@ -140,6 +145,7 @@ namespace WebApp.Controllers
         // POST: Organizations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Doctor,Nurse")]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             if (_context.Organization == null)
