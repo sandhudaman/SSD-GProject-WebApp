@@ -84,6 +84,7 @@ namespace WebApp
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
+                app.UseHsts();
             }
             else
             {
@@ -96,7 +97,7 @@ namespace WebApp
             {
                 DbInitializer.SeedRolesDoctorNurse(scope.ServiceProvider).Wait();
             }
-            app.UseHsts();
+            
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
