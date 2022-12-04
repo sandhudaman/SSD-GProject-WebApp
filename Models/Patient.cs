@@ -21,21 +21,22 @@ namespace WebApp.Models
            
         }
         /// <summary>
-        /// String Firstname With max char length 128
+        /// String Firstname With max char length 60
         /// </summary>
         [Required]
         [JsonProperty]
         [XmlElement]
-        [StringLength(128)]
+        [MinLength(2)]
+        [MaxLength(60)]
         public string FirstName { get; set; }
 
         /// <summary>
-        /// String LastName with char Lenght 128
+        /// String LastName with char Lenght 60
         /// </summary>
         [Required]
         [JsonProperty]
-        [XmlElement]
-        [StringLength(128)]
+        [MinLength(2)]
+        [MaxLength(60)]
         public string LastName { get; set; }
          
         /// <summary>

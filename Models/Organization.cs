@@ -29,8 +29,8 @@ namespace WebApp.Models
         /// <value>Name of Organization</value>
         [XmlElement]
         [JsonProperty]
-        [Required]
-        [StringLength(256)]
+        [Required, MinLength(2)]
+        [MaxLength(60)]
         public string Name { get; set; }
 
         /// <summary>

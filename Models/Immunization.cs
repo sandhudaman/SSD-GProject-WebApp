@@ -7,16 +7,16 @@ namespace WebApp.Models
         [Key]
         public Guid Id { get; set; }
         
-        [Required]
-        [MaxLength(128)]
+        [Required,MinLength(2)]
+        [MaxLength(60)]
         public string OfficialName { get; set; }
         
-        [Required]
-        [MaxLength(128)]
+        [Required,MinLength(2)]
+        [MaxLength(60)]
         public string TradeName { get; set; }
-        
-        [Required]
-        [MaxLength(255)]
+
+        [Required, MinLength(2)]
+        [MaxLength(60)]
         public string LotNumber { get; set; }
         
         [Required]

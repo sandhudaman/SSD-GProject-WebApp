@@ -51,8 +51,8 @@ namespace WebApp.Models
         /// </summary>
         [XmlElement]
         [JsonProperty]
-        [Required]
-        [StringLength(128)]
+        [Required, MinLength(2)]
+        [MaxLength(60)]
         public string FirstName { get; set; }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace WebApp.Models
         /// </summary>
         [XmlElement]
         [JsonProperty]
-        [Required]
-        [StringLength(128)]
+        [Required, MinLength(2)]
+        [MaxLength(60)]
         public string LastName { get; set; }
 
         /// <summary>
@@ -77,7 +77,8 @@ namespace WebApp.Models
         /// </summary>
         [XmlElement]
         [JsonProperty]
-        [Required]
+        [Required, MinLength(2)]
+        [MaxLength(60)]
         public string Address { get; set; }
 
     }
