@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Data;
@@ -19,6 +20,8 @@ namespace WebApp
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+            
+            
 
             var app = builder.Build();
 
@@ -33,6 +36,26 @@ namespace WebApp
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff")
+             });
+            
+            app.Use(async (context, next) =>{
+                context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+                context.Response.Headers.Add("X-Xss-Protection", "1");
+                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must- revalidate");
+                await next();
+             });
+
+            app.UseCookiePolicy(new CookiePolicyOptions{
+                MinimumSameSitePolicy = SameSiteMode.Strict,
+                HttpOnly = HttpOnlyPolicy.Always,
+                Secure = CookieSecurePolicy.Always
+            });
+
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

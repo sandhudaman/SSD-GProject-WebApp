@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Serialization;
 
@@ -29,7 +30,7 @@ namespace WebApp.Models
         /// <value>Name of Organization</value>
         [XmlElement]
         [JsonProperty]
-        [Required, MinLength(2)]
+        [Required, MinLength(2), DisplayName("Organization Name")]
         [MaxLength(60)]
         public string Name { get; set; }
 
@@ -40,7 +41,7 @@ namespace WebApp.Models
         /// <value>Type of Organization</value>
         [XmlElement]
         [JsonProperty]
-        [Required]
+        [Required, DisplayName("Type of Organization")]
         public string Type
         {
             get { return type; }
@@ -76,7 +77,7 @@ namespace WebApp.Models
         /// <value>Address of Organization</value>
         [XmlElement]
         [JsonProperty]
-        [Required]
+        [Required, DisplayName("Organization's Address")]
         public string Address { get; set; }
 
     }

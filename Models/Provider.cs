@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -51,7 +52,7 @@ namespace WebApp.Models
         /// </summary>
         [XmlElement]
         [JsonProperty]
-        [Required, MinLength(2)]
+        [Required, MinLength(2),DisplayName("First Name")]
         [MaxLength(60)]
         public string FirstName { get; set; }
 
@@ -60,7 +61,7 @@ namespace WebApp.Models
         /// </summary>
         [XmlElement]
         [JsonProperty]
-        [Required, MinLength(2)]
+        [Required, MinLength(2), DisplayName("Last Name")]
         [MaxLength(60)]
         public string LastName { get; set; }
 
@@ -69,7 +70,7 @@ namespace WebApp.Models
         /// </summary>
         [XmlElement]
         [JsonProperty]
-        [Required]
+        [Required,DisplayName("License Number")]
         public uint LicenseNumber { get; set; }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace WebApp.Models
         /// </summary>
         [XmlElement]
         [JsonProperty]
-        [Required, MinLength(2)]
+        [Required, MinLength(2),DisplayName("Address")]
         [MaxLength(60)]
         public string Address { get; set; }
 

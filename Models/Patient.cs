@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
@@ -26,7 +27,7 @@ namespace WebApp.Models
         [Required]
         [JsonProperty]
         [XmlElement]
-        [MinLength(2)]
+        [MinLength(2),DisplayName("First Name")]
         [MaxLength(60)]
         public string FirstName { get; set; }
 
@@ -35,14 +36,14 @@ namespace WebApp.Models
         /// </summary>
         [Required]
         [JsonProperty]
-        [MinLength(2)]
+        [MinLength(2), DisplayName("Last Name")]
         [MaxLength(60)]
         public string LastName { get; set; }
          
         /// <summary>
         /// Date of Birth uses Creation Time object to Save 
         /// </summary>
-        [Required]
+        [Required,DisplayName("Date Of Birth")]
         [JsonProperty]
         [XmlElement]
         public DateTimeOffset DateOfBirth
