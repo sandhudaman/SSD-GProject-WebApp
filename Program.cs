@@ -68,9 +68,9 @@ namespace WebApp
                 context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must- revalidate");
                 context.Response.Headers.Add("Pragma", "no-cache");
                 // adding respoinse header for samesite cookies
-                context.Response.Headers.Add("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
+                context.Response.Headers.Add("Set-Cookie", "Secure;SameSite=Strict");
                 // adding header for content security policy
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self';");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self';  img-src 'self' ; font-src 'self'; connect-src 'self';");
                 // adding header policy to remove X-Powered-By
                 context.Response.Headers.Remove("X-Powered-By");
                 // adding header policy for removing server
