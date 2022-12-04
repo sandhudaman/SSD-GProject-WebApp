@@ -54,6 +54,11 @@ namespace WebApp
                     ctx.Context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
                     // Strict-Transport-Security: max-age=31536000; includeSubDomains
                     ctx.Context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+                    // more changes added
+                    ctx.Context.Response.Headers.Remove("Server");
+                    ctx.Context.Response.Headers.Remove("X-Powered-By");
+                    ctx.Context.Response.Headers.Add("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
+
 
                 }
 
@@ -65,9 +70,8 @@ namespace WebApp
                 context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must- revalidate");
                 context.Response.Headers.Add("Pragma", "no-cache");
                 context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-                
+               
                 context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' ; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'self'; form-action 'self'; base-uri 'self';");
-
 
                 // adding header policy to remove X-Powered-By
                 context.Response.Headers.Remove("X-Powered-By");
@@ -75,6 +79,11 @@ namespace WebApp
                 context.Response.Headers.Remove("Server");
                 // Strict -Transport-Security header
                 context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+
+                // Header for cookies 
+                context.Response.Headers.Add("Set-Cookie", "HttpOnly;Secure;SameSite=Strict");
+                
+
 
                 await next();
             });
