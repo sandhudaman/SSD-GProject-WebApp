@@ -58,19 +58,26 @@ namespace WebApp
             app.UseStaticFiles(new StaticFileOptions
             {
                 OnPrepareResponse = ctx =>
-                ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff")
-             });
+                {
+                    ctx.Context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+                    ctx.Context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
+                    ctx.Context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+                   
+
+                }
+                
+            }) ;
             
             app.Use(async (context, next) =>{
                 context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
                 context.Response.Headers.Add("X-Xss-Protection", "1");
-                context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
                 context.Response.Headers.Add("Cache-Control", "no-cache, no-store, must- revalidate");
                 context.Response.Headers.Add("Pragma", "no-cache");
                 // adding respoinse header for samesite cookies
                 context.Response.Headers.Add("Set-Cookie", "Secure;SameSite=Strict");
-                // adding header for content security policy
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self';  img-src 'self' ; font-src 'self'; connect-src 'self';");
+                // adding header for content security policy is set to self
+                context.Response.Headers.Add("Content-Security-Policy", "default-src self");
+
                 // adding header policy to remove X-Powered-By
                 context.Response.Headers.Remove("X-Powered-By");
                 // adding header policy for removing server
