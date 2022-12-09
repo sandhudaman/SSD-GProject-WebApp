@@ -9,7 +9,8 @@
 *.user
 *.userosscache
 *.sln.docstates
-*.json
+appsetting.json
+appSettings.Local.json
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -97,7 +98,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
-
+*.json
 # Chutzpah Test files
 _Chutzpah*
 
