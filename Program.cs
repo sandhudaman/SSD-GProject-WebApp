@@ -33,9 +33,7 @@ namespace WebApp
                     policy.Requirements.Add(new EmailDomainRequirement(emails));
                 });
             });
-
             builder.Services.AddSingleton<IAuthorizationHandler, EmailDomainHandler>();
-
             var app = builder.Build();
             app.UseCookiePolicy(new CookiePolicyOptions
             {
@@ -53,12 +51,9 @@ namespace WebApp
                     ctx.Context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
                     // Strict-Transport-Security: max-age=31536000; includeSubDomains
                     ctx.Context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-
-
                 }
 
             });
-
             app.Use(async (context, next) => {
                 context.Response.Headers.Add("X-Frame-Options", "SAMEORIGIN");
                 context.Response.Headers.Add("X-Xss-Protection", "1");
@@ -66,7 +61,9 @@ namespace WebApp
                 context.Response.Headers.Add("Pragma", "no-cache");
                 context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
                
-                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-eval'; style-src 'self' ; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'self'; form-action 'self'; base-uri 'self';");
+                context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; script-src 'self'" +
+                    " 'unsafe-eval'; style-src 'self' ; img-src 'self' data:; font-src 'self'; connect-src 'self'; " +
+                    "frame-ancestors 'self'; form-action 'self'; base-uri 'self';");
 
                 // adding header policy to remove X-Powered-By
                 context.Response.Headers.Remove("X-Powered-By");
